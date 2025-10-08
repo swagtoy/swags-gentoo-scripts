@@ -20,8 +20,6 @@ my $output = "CRATES=\"\n";
 my $curr_name;
 while (my $line = <$fh>)
 {
-	my $res;
-	
 	if ($line =~ /name = "(.*?)"/)
 	{
 		$curr_name = $1;
