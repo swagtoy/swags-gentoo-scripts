@@ -11,17 +11,22 @@ use warnings;
 use Getopt::Long;
 use Cwd;
 use File::Basename;
+use File::Spec;
 
 my $relative_from_root = 0;
 GetOptions('relative-from-root!' => \$relative_from_root,
            'help' => sub { exit if print "Usage: reporoot.pl [--relative-from-root] [PATH]\n" });
 
-my $path = $ARGV[0] || getcwd;
+my $path_fetch = $ARGV[0] || getcwd;
+my($__,$path,$ebuild_maybe) = File::Spec->splitpath($path_fetch);
+# Very lazy, but whatever
+$path .= $ebuild_maybe unless $ebuild_maybe =~ /.ebuild$/;
+$path =~ s|/$||;
 my $up_path = $path;
 
 while (1)
 {
-	last if $up_path eq '/';
+	last if $up_path eq '/' || !$up_path;
 	
 	if (-d "$up_path/metadata")
 	{
