@@ -28,7 +28,7 @@ while (1)
 {
 	last if $up_path eq '/' || !$up_path;
 	
-	if (-d "$up_path/metadata")
+	if (-d "$up_path/profiles")
 	{
 		if ($relative_from_root != 0)
 		{
