@@ -55,10 +55,10 @@ done
 
 prompt_stuff || exit 1
 
-for file in "${stuff[*]}"; do
+for file in "${stuff[@]}"; do
 	if [[ $opt_files -eq 0 ]]; then
-		mkdir -p "./$file"
+		echo mkdir -p "./$file"
 		echo "${opt_repo}$file" -\> "./$file"
-		cp -r "${opt_repo}$file" $(dirname "./$file")
+		echo cp -r "${opt_repo}$file" $(dirname "./$file")
 	fi
 done
